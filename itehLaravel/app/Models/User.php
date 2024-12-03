@@ -41,4 +41,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function kosnice()
+    {
+        return $this->hasMany(Kosnica::class);
+    }
+
+    public function aktivnosti()
+    {
+        return $this->hasMany(Aktivnost::class);
+    }
+
+    public function komentari()
+    {
+        return $this->hasMany(Komentar::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->roles()->where('naziv', $roleName)->exists();
+    }
 }
