@@ -11,9 +11,11 @@ class Kosnica extends Model
 
     protected $fillable = [
         'naziv',
-        'lokacija',
+        'adresa',
         'opis',
         'user_id',
+        'longitude',
+        'latitude',
     ];
 
     public function user()

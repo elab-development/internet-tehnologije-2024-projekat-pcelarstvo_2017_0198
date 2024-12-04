@@ -14,6 +14,7 @@ class Aktivnost extends Model
         'datum',
         'tip', // Sezonska ili prilagođena
         'opis',
+        'dodatne_beleske',
         'kosnica_id',
         'user_id',
     ];
