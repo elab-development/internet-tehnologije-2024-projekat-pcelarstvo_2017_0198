@@ -13,7 +13,7 @@ class CreateKomentariTable extends Migration
      */
     public function up()
     {
-        Schema::create('komentari', function (Blueprint $table) {
+        Schema::create('komentars', function (Blueprint $table) {
             $table->id(); // Primarni ključ
             $table->text('sadrzaj'); // Sadržaj komentara
             $table->date('datum'); // Datum komentara
@@ -22,7 +22,7 @@ class CreateKomentariTable extends Migration
             $table->timestamps(); // Kolone created_at i updated_at
 
             // Definisanje stranih ključeva
-            $table->foreign('kosnica_id')->references('id')->on('kosnice')->onDelete('cascade');
+            $table->foreign('kosnica_id')->references('id')->on('kosnicas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -34,6 +34,6 @@ class CreateKomentariTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('komentari');
+        Schema::dropIfExists('komentars');
     }
 }

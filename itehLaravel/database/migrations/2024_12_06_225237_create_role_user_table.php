@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveDodatneBeleskeFromAktivnostiTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class RemoveDodatneBeleskeFromAktivnostiTable extends Migration
      */
     public function up()
     {
-        Schema::table('aktivnosts', function (Blueprint $table) {
-            $table->dropColumn('dodatne_beleske'); // Uklanjanje kolone
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class RemoveDodatneBeleskeFromAktivnostiTable extends Migration
      */
     public function down()
     {
-        Schema::table('aktivnosts', function (Blueprint $table) {
-            $table->text('dodatne_beleske')->nullable(); // Vraćanje kolone
-        });
+        Schema::dropIfExists('role_user');
     }
 }

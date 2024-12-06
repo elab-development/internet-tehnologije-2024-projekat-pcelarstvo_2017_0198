@@ -13,7 +13,7 @@ class CreateAktivnostiTable extends Migration
      */
     public function up()
     {
-        Schema::create('aktivnosti', function (Blueprint $table) {
+        Schema::create('aktivnosts', function (Blueprint $table) {
             $table->id(); // Primarni ključ
             $table->string('naziv'); // Naziv aktivnosti
             $table->date('datum'); // Datum aktivnosti
@@ -25,7 +25,7 @@ class CreateAktivnostiTable extends Migration
             $table->timestamps(); // Kolone created_at i updated_at
 
             // Definisanje stranih ključeva
-            $table->foreign('kosnica_id')->references('id')->on('kosnice')->onDelete('cascade');
+            $table->foreign('kosnica_id')->references('id')->on('kosnicas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -37,6 +37,6 @@ class CreateAktivnostiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aktivnosti');
+        Schema::dropIfExists('aktivnosts');
     }
 }

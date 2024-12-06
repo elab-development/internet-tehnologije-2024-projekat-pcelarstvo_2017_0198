@@ -13,7 +13,7 @@ class AddUserIdToKosniceTable extends Migration
      */
     public function up()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable()->after('opis'); // Dodajemo kolonu user_id posle 'opis'
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Strani ključ sa onDelete('cascade')
         });
@@ -26,7 +26,7 @@ class AddUserIdToKosniceTable extends Migration
      */
     public function down()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->dropForeign(['user_id']); // Brisanje stranog ključa
             $table->dropColumn('user_id'); // Brisanje kolone
         });

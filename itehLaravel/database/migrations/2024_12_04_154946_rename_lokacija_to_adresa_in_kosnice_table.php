@@ -13,7 +13,7 @@ class RenameLokacijaToAdresaInKosniceTable extends Migration
      */
     public function up()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->renameColumn('lokacija', 'adresa'); // Preimenovanje kolone
         });
     }
@@ -25,7 +25,7 @@ class RenameLokacijaToAdresaInKosniceTable extends Migration
      */
     public function down()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->renameColumn('adresa', 'lokacija'); // Vraćanje starog naziva
         });
     }

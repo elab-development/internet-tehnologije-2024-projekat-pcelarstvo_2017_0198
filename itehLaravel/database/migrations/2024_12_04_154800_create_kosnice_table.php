@@ -13,7 +13,7 @@ class CreateKosniceTable extends Migration
      */
     public function up()
     {
-        Schema::create('kosnice', function (Blueprint $table) {
+        Schema::create('kosnicas', function (Blueprint $table) {
             $table->id(); // Primarni ključ
             $table->string('naziv'); // Naziv košnice
             $table->string('lokacija')->nullable(); // Lokacija, može biti null
@@ -29,6 +29,6 @@ class CreateKosniceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kosnice');
+        Schema::dropIfExists('kosnicas');
     }
 }

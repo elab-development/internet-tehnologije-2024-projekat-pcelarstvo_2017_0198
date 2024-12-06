@@ -13,7 +13,7 @@ class AddCoordinatesToKosniceTable extends Migration
      */
     public function up()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->decimal('longitude', 10, 7)->nullable()->after('opis'); // Dodaje longitude kolonu
             $table->decimal('latitude', 10, 7)->nullable()->after('longitude'); // Dodaje latitude kolonu
         });
@@ -26,7 +26,7 @@ class AddCoordinatesToKosniceTable extends Migration
      */
     public function down()
     {
-        Schema::table('kosnice', function (Blueprint $table) {
+        Schema::table('kosnicas', function (Blueprint $table) {
             $table->dropColumn(['longitude', 'latitude']); // Uklanja kolone
         });
     }
