@@ -2,21 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aktivnost;
 use App\Models\Kosnica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class KosnicaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kosnice = Kosnica::where('user_id', auth()->id())->get();
-
+        // Validacija parametara za filtriranje i paginaciju
+        $validator = Validator::make($request->all(), [
+            'kosnica_id' => 'nullable|exists:kosnicas,id',
+            'per_page' => 'nullable|integer|min:1|max:100',
+            'page' => 'nullable|integer|min:1',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+    
+        // Dohvatanje aktivnosti sa filtriranjem i paginacijom
+        $query = Aktivnost::query();
+    
+        if ($request->filled('kosnica_id')) {
+            $query->where('kosnica_id', $request->kosnica_id);
+        }
+    
+        $perPage = $request->get('per_page', 10); // Default: 10 stavki po stranici
+        $aktivnosti = $query->paginate($perPage);
+    
         return response()->json([
             'success' => true,
-            'data' => $kosnice
+            'data' => $aktivnosti
         ], 200);
     }
+    
 
     public function show($id)
     {
