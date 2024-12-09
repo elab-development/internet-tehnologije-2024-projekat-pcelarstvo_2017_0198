@@ -20,7 +20,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/kosnice/{id}', [KosnicaController::class, 'update']);
     Route::delete('/kosnice/{id}', [KosnicaController::class, 'destroy']);
 
-
+    Route::get('/aktivnosti/search', [AktivnostController::class, 'search']);
     Route::apiResource('aktivnosti', AktivnostController::class);
 
     // Rute dostupne samo za admin korisnike
