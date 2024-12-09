@@ -23,14 +23,27 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('aktivnosti', AktivnostController::class);
 
+    // Rute dostupne samo za admin korisnike
+    Route::middleware(['role:admin'])->group(function () {
+        Route::get('/roles', [RoleController::class, 'index']);
+        Route::post('/roles', [RoleController::class, 'store']);
+        Route::put('/roles/{id}', [RoleController::class, 'update']);
+        Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+    });
 
-    Route::get('/roles', [RoleController::class, 'index']);
-    Route::post('/roles', [RoleController::class, 'store']);
-    Route::get('/roles/{id}', [RoleController::class, 'show']);
-    Route::put('/roles/{id}', [RoleController::class, 'update']);
-    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+    // Rute dostupne za admin i moderator korisnike
+    Route::middleware(['role:admin,moderator'])->group(function () {
+        Route::post('/roles/assign', [RoleController::class, 'assignRoleToUser']);
+        Route::post('/roles/remove', [RoleController::class, 'removeRoleFromUser']);
+    });
 
-    Route::post('/roles/assign', [RoleController::class, 'assignRoleToUser']);
-    Route::post('/roles/remove', [RoleController::class, 'removeRoleFromUser']);
-    Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
+    // Rute dostupne svima sa određenim ulogama
+    Route::middleware(['role:admin,moderator,user'])->group(function () {
+        Route::get('/roles/{id}', [RoleController::class, 'show']);
+        Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
+    });
+    
 });
+
+
+
