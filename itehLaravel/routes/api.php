@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AktivnostController;
 use App\Http\Controllers\KosnicaController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\UserController;
@@ -21,4 +22,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
     Route::apiResource('aktivnosti', AktivnostController::class);
+
+
+    Route::get('/roles', [RoleController::class, 'index']);
+    Route::post('/roles', [RoleController::class, 'store']);
+    Route::get('/roles/{id}', [RoleController::class, 'show']);
+    Route::put('/roles/{id}', [RoleController::class, 'update']);
+    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
+
+    Route::post('/roles/assign', [RoleController::class, 'assignRoleToUser']);
+    Route::post('/roles/remove', [RoleController::class, 'removeRoleFromUser']);
+    Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
 });
