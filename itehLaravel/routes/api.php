@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AktivnostController;
 use App\Http\Controllers\KosnicaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route; 
@@ -17,4 +18,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/kosnice', [KosnicaController::class, 'store']);
     Route::put('/kosnice/{id}', [KosnicaController::class, 'update']);
     Route::delete('/kosnice/{id}', [KosnicaController::class, 'destroy']);
+
+
+    Route::apiResource('aktivnosti', AktivnostController::class);
 });
