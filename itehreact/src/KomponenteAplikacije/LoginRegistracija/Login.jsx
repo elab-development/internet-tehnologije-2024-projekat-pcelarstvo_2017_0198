@@ -9,7 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/login', { email, password }); 
@@ -54,6 +54,10 @@ const Login = () => {
             </div>
             <button className="login-button" type="submit">Prijavi se</button>
           </form>
+          <p className="register-link">
+            Nemate nalog?{' '}
+            <span onClick={() => navigate('/register')}>Registrujte se</span>
+          </p>
         </div>
       </div>
     </div>

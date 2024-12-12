@@ -158,4 +158,22 @@ body {
       padding: 10px 20px;
     }
   }
-  
+  /* Link za registraciju ispod login dugmeta */
+.register-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #6d4c41;
+  text-align: center;
+}
+
+.register-link span {
+  color: #ffa726;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.register-link span:hover {
+  color: #fb8c00;
+}

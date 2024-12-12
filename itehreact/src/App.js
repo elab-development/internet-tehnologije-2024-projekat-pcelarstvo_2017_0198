@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import POCETNA from './KomponenteAplikacije/PocetnaStranica/POCETNA';
 import Login from './KomponenteAplikacije/LoginRegistracija/Login';
+import Register from './KomponenteAplikacije/LoginRegistracija/Register';
  
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<POCETNA />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
          
         </Routes>
       </Router>
