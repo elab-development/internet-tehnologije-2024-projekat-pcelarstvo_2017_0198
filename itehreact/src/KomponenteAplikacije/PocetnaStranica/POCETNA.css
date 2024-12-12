@@ -111,17 +111,51 @@ body {
     position: relative;
     padding: 20px 0;
   }
-  
-  .step-circle {
+  /* Step Circle */
+.step-circle {
     width: 80px;
     height: 80px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
     margin-bottom: 15px;
     position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  
+  .step-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* SVG Backgrounds for Steps */
+  .nectar-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23F57C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>');
+    background-color: #ffecb3;
+  }
+  
+  .hive-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23FFC107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 12 2 21 9 12 16 3 9"></polygon><polyline points="9 22 12 19 15 22"></polyline></svg>');
+    background-color: #ffe082;
+  }
+  
+  .honeycomb-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23FF9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 12 16 21 9 12 2 3 9"></polygon><polygon points="3 15 12 22 21 15"></polygon></svg>');
+    background-color: #ffd54f;
+  }
+  
+  .harvest-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23FB8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 10l-7-7-7 7"></path><path d="M12 3v18"></path></svg>');
+    background-color: #ffca28;
+  }
+  
+  .jar-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="%23FFA726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v11c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10"></path><path d="M9 15l3 3l3-3"></path></svg>');
+    background-color: #ffc107;
+  }
+  
   
   .step-details h3 {
     font-size: 1.1rem;
@@ -158,27 +192,27 @@ body {
   
   /* Ikone */
   .nectar-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/2857/2857276.png');
+    background-image: url('https://as2.ftcdn.net/v2/jpg/03/74/69/41/1000_F_374694141_dSl7RioHSxYkrnd82zljoyS8An7Ea1J4.jpg');
     background-color: #ffecb3;
   }
   
   .hive-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/2195/2195404.png');
+    background-image: url('https://cdn-icons-png.flaticon.com/512/263/263929.png');
     background-color: #ffe082;
   }
   
   .honeycomb-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/1966/1966163.png');
+    background-image: url('https://cdn-icons-png.flaticon.com/512/4511/4511507.png');
     background-color: #ffd54f;
   }
   
   .harvest-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046854.png');
+    background-image: url('https://cdn1.iconfinder.com/data/icons/farming-78/64/beehive-honey-tree-leafagriculture-harvest-512.png');
     background-color: #ffca28;
   }
   
   .jar-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/103/103085.png');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9C6b423e1T0FV0B4qjrcg6QxC30LSIPsD3w&s');
     background-color: #ffc107;
   }
   
