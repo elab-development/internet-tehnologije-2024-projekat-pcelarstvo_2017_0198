@@ -1,0 +1,272 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #fff8e1;
+    color: #4e342e;
+  }
+  
+  .pocetna-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+  }
+  
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgba(60,60,60,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .hero-content {
+    color: #fbe9e7;
+    max-width: 600px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: 700;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  
+  /* Steps Section */
+  .steps-section {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: -40px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4e342e;
+    font-weight: 600;
+  }
+  
+  /* Process Diagram */
+  .process-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .process-line {
+    display: none;
+  }
+  
+  /* Pseudo-linija ili strelice će biti ostvarene process-arrow elementima */
+  /* Svaki process-step ima strelicu desno (osim poslednjeg), a na mobilu će se slagati vertikalno */
+  
+  .process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 160px;
+    position: relative;
+    padding: 20px 0;
+  }
+  
+  .step-circle {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .step-details h3 {
+    font-size: 1.1rem;
+    margin: 10px 0 5px;
+    color: #4e342e;
+    font-weight: 600;
+  }
+  
+  .step-details p {
+    font-size: 0.9rem;
+    color: #6d4c41;
+    line-height: 1.4;
+  }
+  
+  /* Strelica između koraka */
+  .process-arrow {
+    width: 50px;
+    height: 2px;
+    background: #4e342e;
+    position: relative;
+  }
+  .process-arrow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #4e342e;
+    border-right: 2px solid #4e342e;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  
+  /* Ikone */
+  .nectar-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/2857/2857276.png');
+    background-color: #ffecb3;
+  }
+  
+  .hive-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/2195/2195404.png');
+    background-color: #ffe082;
+  }
+  
+  .honeycomb-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1966/1966163.png');
+    background-color: #ffd54f;
+  }
+  
+  .harvest-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046854.png');
+    background-color: #ffca28;
+  }
+  
+  .jar-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/103/103085.png');
+    background-color: #ffc107;
+  }
+  
+  /* Responsivnost za mobilne uređaje:
+     Na manjim ekranima dijagram će postati vertikalan. */
+  @media (max-width: 900px) {
+    .process-diagram {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .process-arrow {
+      transform: rotate(90deg);
+      margin: 20px 0;
+    }
+  }
+  
+  /* Info Section */
+  .info-section {
+    width: 90%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .info-section p {
+    font-size: 1.1rem;
+    color: #4e342e;
+  }
+  
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .features-list li {
+    font-size: 1rem;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    color: #5d4037;
+  }
+  
+  .features-list li:before {
+    content: '🍯';
+    margin-right: 10px;
+  }
+  
+ 
+  
+  /* Adaptacije za manje ekrane */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.2rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  
+    .hero-section {
+      height: 50vh;
+    }
+  }
+  .start-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ffa726;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .start-button:hover {
+    background-color: #fb8c00;
+    transform: scale(1.05);
+  }
+  
+  .start-button:active {
+    background-color: #f57c00;
+    transform: scale(0.95);
+  }
+  
