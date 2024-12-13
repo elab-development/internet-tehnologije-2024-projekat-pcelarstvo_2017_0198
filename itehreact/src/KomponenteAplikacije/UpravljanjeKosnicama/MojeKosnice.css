@@ -1,0 +1,38 @@
+.moje-kosnice-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .kosnice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .kosnice-table th,
+  .kosnice-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .kosnice-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .filter-container {
+    margin-bottom: 20px;
+  }
+  
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  

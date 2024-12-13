@@ -4,6 +4,7 @@ import './App.css';
 import POCETNA from './KomponenteAplikacije/PocetnaStranica/POCETNA';
 import Login from './KomponenteAplikacije/LoginRegistracija/Login';
 import Register from './KomponenteAplikacije/LoginRegistracija/Register';
+import MojeKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/MojeKosnice';
  
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<POCETNA />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/proizvodnja" element={<MojeKosnice />} />
          
         </Routes>
       </Router>
