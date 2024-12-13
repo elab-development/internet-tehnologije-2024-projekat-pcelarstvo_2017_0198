@@ -16,6 +16,8 @@ const Register = () => {
     specialChar: false,
     number: false,
   });
+  const [showPassword, setShowPassword] = useState(false); // Kontrola vidljivosti lozinke
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false); // Kontrola vidljivosti potvrde lozinke
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
@@ -108,14 +110,23 @@ const Register = () => {
 
             <div className="form-group">
               <label htmlFor="password">Šifra</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Vaša šifra"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  placeholder="Vaša šifra"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? 'Sakrij' : 'Prikaži'}
+                </button>
+              </div>
               <ul className="password-requirements">
                 <li className={passwordValidation.length ? 'valid' : 'invalid'}>
                   Bar 8 karaktera
@@ -138,14 +149,25 @@ const Register = () => {
 
             <div className="form-group">
               <label htmlFor="password_confirmation">Potvrda šifre</label>
-              <input
-                type="password"
-                id="password_confirmation"
-                placeholder="Potvrdite šifru"
-                value={passwordConfirmation}
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
-                required
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPasswordConfirmation ? 'text' : 'password'}
+                  id="password_confirmation"
+                  placeholder="Potvrdite šifru"
+                  value={passwordConfirmation}
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() =>
+                    setShowPasswordConfirmation(!showPasswordConfirmation)
+                  }
+                >
+                  {showPasswordConfirmation ? 'Sakrij' : 'Prikaži'}
+                </button>
+              </div>
             </div>
 
             <button className="login-button" type="submit">

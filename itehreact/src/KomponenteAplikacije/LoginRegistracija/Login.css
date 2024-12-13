@@ -197,3 +197,25 @@ body {
   color: red;
   font-weight: normal;
 }
+.password-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-input-container input {
+  flex: 1;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.toggle-password:hover {
+  text-decoration: underline;
+}
