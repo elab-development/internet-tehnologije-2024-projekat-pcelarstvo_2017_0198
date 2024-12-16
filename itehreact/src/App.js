@@ -5,12 +5,14 @@ import POCETNA from './KomponenteAplikacije/PocetnaStranica/POCETNA';
 import Login from './KomponenteAplikacije/LoginRegistracija/Login';
 import Register from './KomponenteAplikacije/LoginRegistracija/Register';
 import MojeKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/MojeKosnice';
+import Navbar from './KomponenteAplikacije/Navbar/Navbar';
  
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<POCETNA />} />
           <Route path="/login" element={<Login />} />
