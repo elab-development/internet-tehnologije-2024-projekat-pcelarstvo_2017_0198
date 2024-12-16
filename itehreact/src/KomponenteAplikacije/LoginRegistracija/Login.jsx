@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
-import InputField from './InputField'; // Import nove komponente
+import InputField from './InputField'; // Import nove komponente za unos
+import Button from './Button'; // Import nove komponente za dugme
 import pcelicaVideo from './pcelice.mp4';
 
 const Login = () => {
@@ -63,9 +64,7 @@ const Login = () => {
               onToggle={() => setShowPassword(!showPassword)}
               isTextVisible={showPassword}
             />
-            <button className="login-button" type="submit">
-              Prijavi se
-            </button>
+            <Button label="Prijavi se" type="submit" className="login-button" />
           </form>
           <p className="register-link">
             Nemate nalog?{' '}

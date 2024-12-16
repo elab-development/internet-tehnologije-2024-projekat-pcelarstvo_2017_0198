@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 import InputField from './InputField';
+import Button from './Button'; // Import nove komponente za dugme
 import pcelicaVideo from './pcelice.mp4';
 
 const Register = () => {
@@ -16,6 +17,7 @@ const Register = () => {
     uppercase: false,
     specialChar: false,
     number: false,
+
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
@@ -50,10 +52,11 @@ const Register = () => {
         email,
         password,
         password_confirmation: passwordConfirmation,
+        role_id:1
       });
       const { token } = response.data;
       sessionStorage.setItem('token', token);
-      navigate('/proizvodnja');
+      navigate('/login');
     } catch (err) {
       console.error('Greška prilikom registracije:', err);
       alert('Neuspešna registracija. Proverite podatke i pokušajte ponovo.');
@@ -117,9 +120,7 @@ const Register = () => {
               onToggle={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
               isTextVisible={showPasswordConfirmation}
             />
-            <button className="login-button" type="submit">
-              Registruj se
-            </button>
+            <Button label="Registruj se" type="submit" className="login-button" />
           </form>
         </div>
       </div>
