@@ -25,8 +25,9 @@ class KomentarController extends Controller
     $kosnicaId = $request->kosnica_id;
 
     // Dohvatanje komentara za određenu košnicu koje je kreirao ulogovani korisnik
-    $komentari = Komentar::where('kosnica_id', $kosnicaId)
-        ->get();
+    $komentari = Komentar::with('user')
+    ->where('kosnica_id', $kosnicaId)
+    ->get();
 
     return response()->json([
         'success' => true,
