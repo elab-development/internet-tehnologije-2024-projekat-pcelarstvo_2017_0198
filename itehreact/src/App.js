@@ -8,6 +8,7 @@ import MojeKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/MojeKosnice
 import Navbar from './KomponenteAplikacije/Navbar/Navbar';
 import Aktivnosti from './KomponenteAplikacije/UpravljanjeKosnicama/Aktivnosti';
 import KomentariKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/KomentariKosnice';
+import KosniceMapa from './KomponenteAplikacije/UpravljanjeKosnicama/KosniceMapa';
  
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
           <Route path="/proizvodnja" element={<MojeKosnice />} />
           <Route path="/kosnice/:id/aktivnosti" element={<Aktivnosti />} />
           <Route path="/kosnice/:id/komentari" element={<KomentariKosnice />} />
-
+          <Route path="/kosnice/mapa" element={<KosniceMapa />} />
         </Routes>
       </Router>
     </div>
