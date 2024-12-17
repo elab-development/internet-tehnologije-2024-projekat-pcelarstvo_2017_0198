@@ -69,7 +69,10 @@ const MojeKosnice = () => {
   const handleDetaljiClick = (id) => {
     navigate(`/kosnice/${id}/aktivnosti`);
   };
-
+  const handleKomentariClick = (id) => {
+    navigate(`/kosnice/${id}/komentari`);
+  };
+  
   return (
     <div className="moje-kosnice-container">
       <h1 className="section-title">Moje košnice</h1>
@@ -178,7 +181,13 @@ const MojeKosnice = () => {
                       onClick={() => handleDetaljiClick(kosnica.id)}
                       className="start-button"
                     >
-                      Detalji
+                      Aktivnosti
+                    </button>
+                    <button
+                      onClick={() => handleKomentariClick(kosnica.id)}
+                      className="start-button"
+                    >
+                      Komentari
                     </button>
                   </td>
                 </tr>

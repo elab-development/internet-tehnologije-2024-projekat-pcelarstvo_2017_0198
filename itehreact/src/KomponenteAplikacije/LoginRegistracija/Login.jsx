@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
-import InputField from './InputField'; // Import nove komponente za unos
-import Button from './Button'; // Import nove komponente za dugme
+import InputField from './InputField';  
+import Button from './Button';  
 import pcelicaVideo from './pcelice.mp4';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('markobogdanovic0409@gmail.com');
+  const [password, setPassword] = useState('markobogdanovic0409');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {

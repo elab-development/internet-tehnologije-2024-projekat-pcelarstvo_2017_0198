@@ -219,3 +219,23 @@ body {
 .toggle-password:hover {
   text-decoration: underline;
 }
+.password-requirements {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
+.password-requirements li {
+  margin-bottom: 5px;
+}
+
+.password-requirements .valid {
+  color: green;
+  font-weight: bold;
+}
+
+.password-requirements .invalid {
+  color: red;
+  font-weight: normal;
+}

@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">🐝 Moje Košnice</Link>
+        <Link to="/">🐝 Moje košnice</Link>
       </div>
       <ul className="navbar-links">
         <li>

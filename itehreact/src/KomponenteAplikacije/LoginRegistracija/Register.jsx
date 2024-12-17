@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 import InputField from './InputField';
-import Button from './Button'; // Import nove komponente za dugme
+import Button from './Button';
 import pcelicaVideo from './pcelice.mp4';
 
 const Register = () => {
@@ -17,7 +17,6 @@ const Register = () => {
     uppercase: false,
     specialChar: false,
     number: false,
-
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
@@ -52,7 +51,7 @@ const Register = () => {
         email,
         password,
         password_confirmation: passwordConfirmation,
-        role_id:1
+        role_id: 1,
       });
       const { token } = response.data;
       sessionStorage.setItem('token', token);
@@ -108,6 +107,12 @@ const Register = () => {
               onToggle={() => setShowPassword(!showPassword)}
               isTextVisible={showPassword}
             />
+            <ul className="password-requirements">
+              <li className={passwordValidation.length ? 'valid' : 'invalid'}>Minimum 8 karaktera</li>
+              <li className={passwordValidation.uppercase ? 'valid' : 'invalid'}>Jedno veliko slovo</li>
+              <li className={passwordValidation.specialChar ? 'valid' : 'invalid'}>Jedan specijalan znak</li>
+              <li className={passwordValidation.number ? 'valid' : 'invalid'}>Jedan broj</li>
+            </ul>
             <InputField
               label="Potvrda šifre"
               type="password"
