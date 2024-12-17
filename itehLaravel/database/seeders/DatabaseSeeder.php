@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
     {
         // Kreiranje rola
         $adminRole = Role::create([
-            'naziv' => 'Admin',
+            'naziv' => 'admin',
             'opis' => 'Administrator sa punim pravima',
         ]);
 
         $beekeeperRole = Role::create([
-            'naziv' => 'Pčelar',
+            'naziv' => 'pcelar',
             'opis' => 'Pčelar koji upravlja košnicama',
         ]);
 
@@ -34,16 +34,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin Pčelar',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
+            'role_id'=>1
+            
         ]);
 
         $beekeeperUser = User::create([
             'name' => 'Ivan Pčelar',
             'email' => 'ivan@example.com',
             'password' => bcrypt('password'),
+            'role_id'=>2
+            
         ]);
 
-        $adminUser->roles()->attach($adminRole);
-        $beekeeperUser->roles()->attach($beekeeperRole);
+        //ovo nam ne treba jer smo dodali role_id
+        // $adminUser->roles()->attach($adminRole);
+        // $beekeeperUser->roles()->attach($beekeeperRole);
 
         // Kreiranje košnica
         $kosnica1 = Kosnica::create([

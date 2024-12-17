@@ -13,7 +13,7 @@ class RoleMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string|array  $roles
+     * @param  mixed $roles
      * @return mixed
      */
     public function handle(Request $request, Closure $next, ...$roles)
@@ -24,8 +24,13 @@ class RoleMiddleware
             return response()->json(['success' => false, 'message' => 'Unauthorized'], 401);
         }
 
-        if (!$user->roles()->whereIn('naziv', $roles)->exists()) {
-            return response()->json(['success' => false, 'message' => 'Forbidden'], 403);
+        // Provera uloge na osnovu role_id
+        if (!in_array($user->role_id, $roles)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Forbidden',
+                'role_id' => $user->role_id
+            ], 403);
         }
 
         return $next($request);

@@ -85,6 +85,24 @@ class RoleController extends Controller
         ], 200);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     // Dodeljivanje uloge korisniku
     public function assignRoleToUser(Request $request)
     {
@@ -97,45 +115,29 @@ class RoleController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
         }
 
-        $user = User::findOrFail($request->user_id);
-        $user->roles()->syncWithoutDetaching([$request->role_id]);
+        $user = User::findOrFail($request->user_id);  //pronalazi usera iz baze
+        $user->role_id = $request->role_id;//azurira mu ulogu
+        $user->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Role assigned to user successfully'
+            'message' => 'Role assigned to user successfully',
+            'user' => $user
         ], 200);
     }
 
-    // Uklanjanje uloge korisniku
-    public function removeRoleFromUser(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|exists:users,id',
-            'role_id' => 'required|exists:roles,id'
-        ]);
+ 
 
-        if ($validator->fails()) {
-            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
-        }
-
-        $user = User::findOrFail($request->user_id);
-        $user->roles()->detach($request->role_id);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Role removed from user successfully'
-        ], 200);
-    }
-
+ 
     // Prikaz svih korisnika sa određenom ulogom
     public function usersByRole($roleId)
     {
-        $role = Role::findOrFail($roleId);
-        $users = $role->users;
+        $users = User::where('role_id', $roleId)->get();
 
         return response()->json([
             'success' => true,
             'data' => $users
         ], 200);
     }
+
 }

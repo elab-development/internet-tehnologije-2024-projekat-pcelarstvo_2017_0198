@@ -22,9 +22,7 @@ class AktivnostController extends Controller
         $kosnicaId = $request->get('kosnica_id');
     
        
-        $aktivnosti = Aktivnost::where('kosnica_id', $kosnicaId)
-            ->where('user_id', auth()->id())
-            ->get();
+        $aktivnosti = Aktivnost::where('kosnica_id', $kosnicaId)->get();
     
         return response()->json([
             'success' => true,
@@ -145,9 +143,6 @@ class AktivnostController extends Controller
         if ($request->filled('kosnica_id')) {
             $query->where('kosnica_id', $request->kosnica_id);
         }
-
-        // Filtriranje po korisniku
-        $query->where('user_id', auth()->id());
 
         $aktivnosti = $query->get();
 

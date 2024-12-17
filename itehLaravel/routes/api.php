@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AktivnostController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\KosnicaController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
@@ -16,32 +17,38 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanc
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/kosnice', [KosnicaController::class, 'index']);
     Route::get('/kosnice/{id}', [KosnicaController::class, 'show']);
-    Route::post('/kosnice', [KosnicaController::class, 'store']);
-    Route::put('/kosnice/{id}', [KosnicaController::class, 'update']);
-    Route::delete('/kosnice/{id}', [KosnicaController::class, 'destroy']);
-
-    Route::get('/aktivnosti/search', [AktivnostController::class, 'search']);
-    Route::apiResource('aktivnosti', AktivnostController::class);
-
+   
+    Route::get('/komentari', [KomentarController::class, 'index']);
+    Route::get('/komentari/{id}', [KomentarController::class, 'show']);
+    Route::post('/komentari', [KomentarController::class, 'store']);
+    Route::put('/komentari/{id}', [KomentarController::class, 'update']);
+    Route::delete('/komentari/{id}', [KomentarController::class, 'destroy']);
+ 
     // Rute dostupne samo za admin korisnike
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['role:1'])->group(function () {  //role id 1 je admin
         Route::get('/roles', [RoleController::class, 'index']);
         Route::post('/roles', [RoleController::class, 'store']);
         Route::put('/roles/{id}', [RoleController::class, 'update']);
         Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
-    });
 
-    // Rute dostupne za admin i moderator korisnike
-    Route::middleware(['role:admin,moderator'])->group(function () {
+       
         Route::post('/roles/assign', [RoleController::class, 'assignRoleToUser']);
-        Route::post('/roles/remove', [RoleController::class, 'removeRoleFromUser']);
+    
+        
+        Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
+
     });
 
-    // Rute dostupne svima sa određenim ulogama
-    Route::middleware(['role:admin,moderator,user'])->group(function () {
-        Route::get('/roles/{id}', [RoleController::class, 'show']);
-        Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
+
+    Route::middleware(['role:2'])->group(function () { //role id 2 je pcelar
+        Route::post('/kosnice', [KosnicaController::class, 'store']);
+        Route::put('/kosnice/{id}', [KosnicaController::class, 'update']);
+        Route::delete('/kosnice/{id}', [KosnicaController::class, 'destroy']);
+
+        Route::get('/aktivnosti/search', [AktivnostController::class, 'search']);
+        Route::apiResource('aktivnosti', AktivnostController::class);
     });
+ 
     
 });
 
