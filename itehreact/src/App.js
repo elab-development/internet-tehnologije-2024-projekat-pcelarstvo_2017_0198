@@ -7,6 +7,7 @@ import Register from './KomponenteAplikacije/LoginRegistracija/Register';
 import MojeKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/MojeKosnice';
 import Navbar from './KomponenteAplikacije/Navbar/Navbar';
 import Aktivnosti from './KomponenteAplikacije/UpravljanjeKosnicama/Aktivnosti';
+import KomentariKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/KomentariKosnice';
  
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/proizvodnja" element={<MojeKosnice />} />
           <Route path="/kosnice/:id/aktivnosti" element={<Aktivnosti />} />
+          <Route path="/kosnice/:id/komentari" element={<KomentariKosnice />} />
+
         </Routes>
       </Router>
     </div>
