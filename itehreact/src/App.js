@@ -6,6 +6,7 @@ import Login from './KomponenteAplikacije/LoginRegistracija/Login';
 import Register from './KomponenteAplikacije/LoginRegistracija/Register';
 import MojeKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/MojeKosnice';
 import Navbar from './KomponenteAplikacije/Navbar/Navbar';
+import Aktivnosti from './KomponenteAplikacije/UpravljanjeKosnicama/Aktivnosti';
  
 
 function App() {
