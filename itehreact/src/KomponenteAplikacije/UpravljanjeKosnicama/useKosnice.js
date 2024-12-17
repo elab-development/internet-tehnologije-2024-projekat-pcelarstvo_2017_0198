@@ -16,10 +16,15 @@ const useKosnice = (initialPage = 1, initialPerPage = 10, filter = null) => {
       const params = {
         page,
         per_page: perPage,
-        ...(filter && { kosnica_id: filter }),
+        ...(filter && { search: filter }), // Koristimo search umesto kosnica_id
       };
-
+  
+      const token = sessionStorage.getItem('token');
+  
       const response = await axios.get('http://127.0.0.1:8000/api/kosnice', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         params,
       });
       setKosnice(response.data.data.data);
@@ -30,7 +35,7 @@ const useKosnice = (initialPage = 1, initialPerPage = 10, filter = null) => {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchKosnice();
   }, [page, perPage, filter]);

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useKosnice from './useKosnice';
-
 const MojeKosnice = () => {
   const [filter, setFilter] = useState(null);
   const { kosnice, page, setPage, perPage, setPerPage, loading, error, totalPages } = useKosnice(1, 10, filter);
@@ -16,11 +15,11 @@ const MojeKosnice = () => {
 
       {/* Filter */}
       <div className="filter-container">
-        <label htmlFor="kosnica-filter">Filter po ID košnice:</label>
+        <label htmlFor="kosnica-filter">Pretraži po nazivu ili opisu:</label>
         <input
           type="text"
           id="kosnica-filter"
-          placeholder="Unesite ID košnice"
+          placeholder="Unesite naziv ili opis košnice"
           onChange={handleFilterChange}
         />
       </div>

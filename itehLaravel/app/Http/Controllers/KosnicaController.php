@@ -13,7 +13,7 @@ class KosnicaController extends Controller
     {
         // Validacija parametara za filtriranje i paginaciju
         $validator = Validator::make($request->all(), [
-            'kosnica_id' => 'nullable|exists:kosnicas,id',
+            'search' => 'nullable|string|max:255', // Za pretragu po nazivu ili opisu
             'per_page' => 'nullable|integer|min:1|max:100',
             'page' => 'nullable|integer|min:1',
         ]);
@@ -22,21 +22,27 @@ class KosnicaController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
         }
     
-        // Dohvatanje aktivnosti sa filtriranjem i paginacijom
-        $query = Aktivnost::query();
+        // Dohvatanje košnica koje pripadaju ulogovanom korisniku
+        $query = Kosnica::where('user_id', auth()->id());
     
-        if ($request->filled('kosnica_id')) {
-            $query->where('kosnica_id', $request->kosnica_id);
+        // Primena pretrage po nazivu ili opisu
+        if ($request->filled('search')) {
+            $searchTerm = $request->get('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('naziv', 'like', "%{$searchTerm}%")
+                  ->orWhere('opis', 'like', "%{$searchTerm}%");
+            });
         }
     
         $perPage = $request->get('per_page', 10); // Default: 10 stavki po stranici
-        $aktivnosti = $query->paginate($perPage);
+        $kosnice = $query->paginate($perPage);
     
         return response()->json([
             'success' => true,
-            'data' => $aktivnosti
+            'data' => $kosnice
         ], 200);
     }
+    
     
 
     public function show($id)
