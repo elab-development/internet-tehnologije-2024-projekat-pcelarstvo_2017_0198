@@ -1,38 +1,215 @@
+/* Glavni kontejner */
 .moje-kosnice-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background: #fff8e1;
+  color: #4e342e;
+}
+
+/* Sekcija forme i liste košnica */
+.steps-section {
+  width: 90%;
+  max-width: 1200px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+/* Naslov sekcije */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #4e342e;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Forma za kreiranje košnice */
+.create-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.create-form div {
+  display: flex;
+  flex-direction: column;
+  width: 48%; /* Dve kolone */
+}
+
+.create-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #5d4037;
+}
+
+.create-form input {
+  padding: 8px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.create-form input:focus {
+  outline: none;
+  border-color: #fb8c00;
+  box-shadow: 0 0 5px rgba(255, 152, 0, 0.3);
+}
+
+.start-button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ffa726;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.start-button:hover {
+  background-color: #fb8c00;
+  transform: scale(1.05);
+}
+
+.start-button:active {
+  background-color: #f57c00;
+  transform: scale(0.95);
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Filter input */
+.filter-container {
+  margin: 20px 0;
+  width: 90%;
+  max-width: 600px;
+}
+
+.filter-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #5d4037;
+}
+
+.filter-container input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.filter-container input:focus {
+  outline: none;
+  border-color: #fb8c00;
+  box-shadow: 0 0 5px rgba(255, 152, 0, 0.3);
+}
+
+/* Tabela košnica */
+.kosnice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.kosnice-table th,
+.kosnice-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.kosnice-table th {
+  background: #ffecb3;
+  color: #4e342e;
+  font-weight: bold;
+}
+
+.kosnice-table tr:nth-child(even) {
+  background: #fff8e1;
+}
+
+.kosnice-table tr:hover {
+  background: #ffe082;
+  transition: background 0.3s ease;
+}
+
+/* Paginacija */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-container button {
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ffa726;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.pagination-container button:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.pagination-container button:hover:not(:disabled) {
+  background-color: #fb8c00;
+  transform: scale(1.05);
+}
+
+.pagination-container select {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #4e342e;
+}
+
+.pagination-container span {
+  font-weight: bold;
+  color: #5d4037;
+}
+
+/* Responsive dizajn */
+@media (max-width: 768px) {
+  .create-form div {
+    width: 100%; /* Jedna kolona na manjim ekranima */
   }
-  
-  .kosnice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
+
   .kosnice-table th,
   .kosnice-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+    padding: 8px;
   }
-  
-  .kosnice-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .filter-container {
-    margin-bottom: 20px;
-  }
-  
+
   .pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 5px;
   }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
-  }
-  
+}
