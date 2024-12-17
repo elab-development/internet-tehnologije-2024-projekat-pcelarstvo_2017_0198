@@ -8,15 +8,31 @@ use Illuminate\Support\Facades\Validator;
 
 class AktivnostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $aktivnosti = Aktivnost::where('user_id', auth()->id())->get();
-
+        // Validacija da je prosleđen ID košnice
+        $validator = Validator::make($request->all(), [
+            'kosnica_id' => 'required|exists:kosnicas,id',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+    
+        $kosnicaId = $request->get('kosnica_id');
+    
+        // Dohvatanje svih aktivnosti za određenu košnicu, uključujući komentare
+        $aktivnosti = Aktivnost::with('komentari') // Pretpostavka da postoji relacija komentari u modelu Aktivnost
+            ->where('kosnica_id', $kosnicaId)
+            ->where('user_id', auth()->id())
+            ->get();
+    
         return response()->json([
             'success' => true,
             'data' => $aktivnosti
         ], 200);
     }
+    
 
     public function show($id)
     {

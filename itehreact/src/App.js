@@ -18,7 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/proizvodnja" element={<MojeKosnice />} />
-         
+          <Route path="/kosnice/:id/aktivnosti" element={<Aktivnosti />} />
         </Routes>
       </Router>
     </div>

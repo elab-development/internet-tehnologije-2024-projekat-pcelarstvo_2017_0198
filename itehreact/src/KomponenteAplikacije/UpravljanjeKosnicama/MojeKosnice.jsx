@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import useKosnice from './useKosnice';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './MojeKosnice.css';
+
 const MojeKosnice = () => {
   const [filter, setFilter] = useState(null);
   const [newKosnica, setNewKosnica] = useState({
@@ -12,6 +14,7 @@ const MojeKosnice = () => {
     latitude: '',
   });
   const [createError, setCreateError] = useState(null);
+  const navigate = useNavigate(); // React Router navigacija
 
   const {
     kosnice,
@@ -63,9 +66,13 @@ const MojeKosnice = () => {
     }
   };
 
+  const handleDetaljiClick = (id) => {
+    navigate(`/kosnice/${id}/aktivnosti`);
+  };
+
   return (
     <div className="moje-kosnice-container">
-      <h1 className="section-title">Moje Košnice</h1>
+      <h1 className="section-title">Moje košnice</h1>
 
       {/* Forma za kreiranje nove košnice */}
       <div className="steps-section">
@@ -156,6 +163,7 @@ const MojeKosnice = () => {
                 <th>Naziv</th>
                 <th>Adresa</th>
                 <th>Opis</th>
+                <th>Akcija</th>
               </tr>
             </thead>
             <tbody>
@@ -165,6 +173,14 @@ const MojeKosnice = () => {
                   <td>{kosnica.naziv}</td>
                   <td>{kosnica.adresa}</td>
                   <td>{kosnica.opis || 'N/A'}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDetaljiClick(kosnica.id)}
+                      className="start-button"
+                    >
+                      Detalji
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
