@@ -21,9 +21,8 @@ class AktivnostController extends Controller
     
         $kosnicaId = $request->get('kosnica_id');
     
-        // Dohvatanje svih aktivnosti za određenu košnicu, uključujući komentare
-        $aktivnosti = Aktivnost::with('komentari') // Pretpostavka da postoji relacija komentari u modelu Aktivnost
-            ->where('kosnica_id', $kosnicaId)
+       
+        $aktivnosti = Aktivnost::where('kosnica_id', $kosnicaId)
             ->where('user_id', auth()->id())
             ->get();
     
@@ -51,7 +50,7 @@ class AktivnostController extends Controller
             'datum' => 'required|date',
             'tip' => 'required|string|in:sezonska,prilagodjena',
             'opis' => 'nullable|string',
-            'dodatne_beleske' => 'nullable|string',
+      
             'kosnica_id' => 'required|exists:kosnicas,id',
         ]);
 
@@ -79,7 +78,7 @@ class AktivnostController extends Controller
             'datum' => 'required|date',
             'tip' => 'required|string|in:sezonska,prilagodjena',
             'opis' => 'nullable|string',
-            'dodatne_beleske' => 'nullable|string',
+           
             'kosnica_id' => 'required|exists:kosnicas,id',
         ]);
 
