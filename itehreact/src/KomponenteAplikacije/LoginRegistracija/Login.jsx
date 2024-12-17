@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+ 
 import './Login.css';
-import InputField from './InputField';  
-import Button from './Button';  
+import InputField from './InputField';
+import Button from './Button';
 import pcelicaVideo from './pcelice.mp4';
+import { AuthContext } from '../AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('markobogdanovic0409@gmail.com');
   const [password, setPassword] = useState('markobogdanovic0409');
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +23,7 @@ const Login = () => {
         password,
       });
       const { token } = response.data;
-      sessionStorage.setItem('token', token);
+      login(token); // Pozivamo funkciju iz AuthContext-a
       navigate('/proizvodnja');
     } catch (err) {
       console.error('Greška prilikom logina:', err);
@@ -30,14 +33,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <video
-        className="login-video"
-        src={pcelicaVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <video className="login-video" src={pcelicaVideo} autoPlay loop muted playsInline />
       <div className="login-overlay">
         <div className="login-content">
           <h1 className="login-title">Dobrodošli!</h1>
@@ -66,10 +62,6 @@ const Login = () => {
             />
             <Button label="Prijavi se" type="submit" className="login-button" />
           </form>
-          <p className="register-link">
-            Nemate nalog?{' '}
-            <span onClick={() => navigate('/register')}>Registrujte se</span>
-          </p>
         </div>
       </div>
     </div>
