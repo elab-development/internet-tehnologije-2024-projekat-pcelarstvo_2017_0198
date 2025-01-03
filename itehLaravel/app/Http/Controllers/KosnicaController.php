@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aktivnost;
+use App\Models\Komentar;
 use App\Models\Kosnica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class KosnicaController extends Controller
 {
@@ -107,11 +109,35 @@ class KosnicaController extends Controller
     public function destroy($id)
     {
         $kosnica = Kosnica::where('user_id', auth()->id())->findOrFail($id);
-        $kosnica->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Kosnica deleted successfully'
-        ], 200);
+    
+        // Pokretanje transakcije
+        try {
+           DB::beginTransaction();
+    
+            // Brisanje svih aktivnosti i komentara povezanih sa ovom košnicom
+            Aktivnost::where('kosnica_id', $kosnica->id)->delete();
+            Komentar::where('kosnica_id', $kosnica->id)->delete();
+    
+            // Brisanje košnice
+            $kosnica->delete();
+    
+            // Potvrda transakcije
+            DB::commit();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Košnica i svi povezani podaci uspešno obrisani.'
+            ], 200);
+        } catch (\Exception $e) {
+            // Povrat transakcije u slučaju greške
+            DB::rollBack();
+    
+            return response()->json([
+                'success' => false,
+                'message' => 'Došlo je do greške prilikom brisanja košnice.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+    
 }
