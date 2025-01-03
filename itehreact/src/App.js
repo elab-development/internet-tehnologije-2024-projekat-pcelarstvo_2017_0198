@@ -12,6 +12,7 @@ import KomentariKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/Koment
 import KosniceMapa from './KomponenteAplikacije/UpravljanjeKosnicama/KosniceMapa';
 import { AuthProvider } from './KomponenteAplikacije/AuthContext';
 import Breadcrumbs from './KomponenteAplikacije/Breadcrumbs';
+import AdminDashboard from './KomponenteAplikacije/Admin/AdminDashboard';
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
             <Route path="/kosnice/:id/aktivnosti" element={<Aktivnosti />} />
             <Route path="/kosnice/:id/komentari" element={<KomentariKosnice />} />
             <Route path="/kosnice/mapa" element={<KosniceMapa />} />
+
+
+            <Route path="/adminDashboard" element={<AdminDashboard />} />
+
           </Routes>
         </Router>
       </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AktivnostController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\KosnicaController;
@@ -36,6 +37,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
         
         Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
+
+
+
+
+
+        Route::get('/admin/users-stats', [AdminController::class, 'usersStats']);
+        Route::get('/admin/kosnice-stats', [AdminController::class, 'kosniceStats']);
+        Route::get('/admin/aktivnosti-stats', [AdminController::class, 'aktivnostiStats']);
+        Route::get('/admin/komentari-stats', [AdminController::class, 'komentariStats']);
+        Route::post('/admin/aktivnosti-date-range', [AdminController::class, 'aktivnostiByDateRange']);
+
+
+
+
 
     });
 
