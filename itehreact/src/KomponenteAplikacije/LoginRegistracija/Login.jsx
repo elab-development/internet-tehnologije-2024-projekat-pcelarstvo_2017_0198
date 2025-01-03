@@ -22,9 +22,10 @@ const Login = () => {
         email,
         password,
       });
-      const { token } = response.data;
-      login(token); // Pozivamo funkciju iz AuthContext-a
-      navigate('/proizvodnja');
+      const { token,user } = response.data;
+      login(token,user); // Pozivamo funkciju iz AuthContext-a
+      sessionStorage.setItem("userId",user.id)
+      navigate('/kosnice');
     } catch (err) {
       console.error('Greška prilikom logina:', err);
       alert('Neuspešna prijava. Proverite kredencijale.');

@@ -45,7 +45,7 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <Link to="/proizvodnja">Proizvodnja</Link>
+              <Link to="/kosnice">Proizvodnja</Link>
             </li>
             <li>
               <Link to="/kosnice/mapa">Mapa košnica</Link>
