@@ -11,6 +11,7 @@ import Aktivnosti from './KomponenteAplikacije/UpravljanjeKosnicama/Aktivnosti';
 import KomentariKosnice from './KomponenteAplikacije/UpravljanjeKosnicama/KomentariKosnice';
 import KosniceMapa from './KomponenteAplikacije/UpravljanjeKosnicama/KosniceMapa';
 import { AuthProvider } from './KomponenteAplikacije/AuthContext';
+import Breadcrumbs from './KomponenteAplikacije/Breadcrumbs';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <div className="App">
         <Router>
           <Navbar />
+          <Breadcrumbs />
           <Routes>
             <Route path="/" element={<POCETNA />} />
             <Route path="/login" element={<Login />} />
