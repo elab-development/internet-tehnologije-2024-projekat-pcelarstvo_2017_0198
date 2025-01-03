@@ -14,8 +14,9 @@ const MojeKosnice = () => {
     latitude: '',
   });
   const [createError, setCreateError] = useState(null);
-  const navigate = useNavigate(); // React Router navigacija
+  const navigate = useNavigate();
 
+  // Uzimamo i setKosnice iz custom hook-a
   const {
     kosnice,
     page,
@@ -25,6 +26,7 @@ const MojeKosnice = () => {
     loading,
     error,
     totalPages,
+    setKosnice,
   } = useKosnice(1, 10, filter);
 
   const handleFilterChange = (e) => {
@@ -40,6 +42,7 @@ const MojeKosnice = () => {
   const handleCreateKosnica = async (e) => {
     e.preventDefault();
     setCreateError(null);
+
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.post(
@@ -51,7 +54,11 @@ const MojeKosnice = () => {
           },
         }
       );
-      kosnice.unshift(response.data.data); // Dodavanje nove košnice u listu
+
+      // Dodavanje nove košnice u lokalni state kako bi se odmah prikazala
+      setKosnice((prevKosnice) => [response.data.data, ...prevKosnice]);
+
+      // Resetujemo polja forme
       setNewKosnica({
         naziv: '',
         adresa: '',
@@ -66,13 +73,37 @@ const MojeKosnice = () => {
     }
   };
 
+  const handleDeleteKosnica = async (id) => {
+    const confirmDelete = window.confirm(
+      'Da li ste sigurni da želite da obrišete ovu košnicu?'
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const token = sessionStorage.getItem('token');
+      await axios.delete(`http://127.0.0.1:8000/api/kosnice/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Ažuriranje lokalnog state-a: uklanjamo obrisanu košnicu
+      setKosnice((prevKosnice) =>
+        prevKosnice.filter((kosnica) => kosnica.id !== id)
+      );
+    } catch (err) {
+      alert('Došlo je do greške prilikom brisanja košnice.');
+    }
+  };
+
   const handleDetaljiClick = (id) => {
     navigate(`/kosnice/${id}/aktivnosti`);
   };
+
   const handleKomentariClick = (id) => {
     navigate(`/kosnice/${id}/komentari`);
   };
-  
+
   return (
     <div className="moje-kosnice-container">
       <h1 className="section-title">Moje košnice</h1>
@@ -141,7 +172,7 @@ const MojeKosnice = () => {
         </form>
       </div>
 
-      {/* Filter */}
+      {/* Filter pretraga */}
       <div className="filter-container">
         <label htmlFor="kosnica-filter">Pretraži po nazivu ili opisu:</label>
         <input
@@ -158,7 +189,7 @@ const MojeKosnice = () => {
           <p>Učitavanje...</p>
         ) : error ? (
           <p className="error-message">{error}</p>
-        ) : kosnice.length > 0 ? (
+        ) : kosnice && kosnice.length > 0 ? (
           <table className="kosnice-table">
             <thead>
               <tr>
@@ -188,6 +219,12 @@ const MojeKosnice = () => {
                       className="start-button"
                     >
                       Komentari
+                    </button>
+                    <button
+                      onClick={() => handleDeleteKosnica(kosnica.id)}
+                      className="start-button"
+                    >
+                      Obriši
                     </button>
                   </td>
                 </tr>
