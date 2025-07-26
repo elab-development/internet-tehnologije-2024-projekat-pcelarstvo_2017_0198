@@ -39,8 +39,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/roles/{roleId}/users', [RoleController::class, 'usersByRole']);
 
 
-
-
+         Route::get('/admin/kosnice', [KosnicaController::class, 'indexAdmin']);
+        Route::post('/admin/aktivnosti', [AktivnostController::class, 'adminStore']);
 
         Route::get('/admin/users-stats', [AdminController::class, 'usersStats']);
         Route::get('/admin/kosnice-stats', [AdminController::class, 'kosniceStats']);

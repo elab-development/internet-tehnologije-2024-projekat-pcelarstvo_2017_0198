@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ObavestiPcelara;
 use App\Models\Aktivnost;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AktivnostController extends Controller
@@ -150,6 +153,33 @@ class AktivnostController extends Controller
             'success' => true,
             'data' => $aktivnosti
         ], 200);
+    }
+
+
+    public function adminStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'naziv' => 'required|string|max:255',
+            'datum' => 'required|date',
+            'tip' => 'required|string|in:sezonska,prilagodjena',
+            'opis' => 'nullable|string',
+            'kosnica_id' => 'required|exists:kosnicas,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $aktivnost = Aktivnost::create($validator->validated());
+
+        // Slanje email-a
+        $korisnik = User::find($request->user_id);
+        if ($korisnik && $korisnik->email) {
+            Mail::to($korisnik->email)->send(new ObavestiPcelara($aktivnost));
+        }
+
+        return response()->json(['success' => true, 'data' => $aktivnost], 201);
     }
 
 }

@@ -13,6 +13,7 @@ import KosniceMapa from './KomponenteAplikacije/UpravljanjeKosnicama/KosniceMapa
 import { AuthProvider } from './KomponenteAplikacije/AuthContext';
 import Breadcrumbs from './KomponenteAplikacije/Breadcrumbs';
 import AdminDashboard from './KomponenteAplikacije/Admin/AdminDashboard';
+import AdminZakaziAktivnost from './KomponenteAplikacije/Admin/AdminZakaziAktivnost';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
 
 
             <Route path="/adminDashboard" element={<AdminDashboard />} />
-
+            <Route path="/adminDashboard/aktivnosti" element={<AdminZakaziAktivnost />} />
           </Routes>
         </Router>
       </div>

@@ -25,7 +25,13 @@ const Login = () => {
       const { token,user } = response.data;
       login(token,user); // Pozivamo funkciju iz AuthContext-a
       sessionStorage.setItem("userId",user.id)
-      navigate('/kosnice');
+      sessionStorage.setItem("uloga", user.role_id); //dodajemo ulogu u sessionStorage da bismo mogli da u navbaru prikakazemo odgovarajuce rute za admina ili pcelara
+
+      if(user.role_id === 1) {
+        navigate('/adminDashboard');
+      }else{
+        navigate('/kosnice');
+      }
     } catch (err) {
       console.error('Greška prilikom logina:', err);
       alert('Neuspešna prijava. Proverite kredencijale.');

@@ -8,7 +8,8 @@ import { AuthContext } from '../AuthContext';
 const Navbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-
+ // Učitavamo ulogu iz sessionStorage
+  const uloga = Number(sessionStorage.getItem("uloga")); // npr. 1 za admina, 2 za pčelara
   const handleLogout = async () => {
     try {
       const token = sessionStorage.getItem('token');
@@ -27,7 +28,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">🐝 Moje košnice</Link>
+        <Link to="/">🐝 Pcelarstvo</Link>
       </div>
       <ul className="navbar-links">
         {!isAuthenticated ? (
@@ -44,12 +45,29 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <li>
+
+           {uloga === 1 && (
+              <>
+                <li>
+                  <Link to="/adminDashboard">Admin panel</Link>
+                </li>
+                <li>
+                  <Link to="/adminDashboard/aktivnosti">Zakazivanje aktivnosti</Link>
+                </li>
+              </>
+            )}
+
+             {uloga ===2 && (
+              <>
+                  <li>
               <Link to="/kosnice">Proizvodnja</Link>
             </li>
             <li>
               <Link to="/kosnice/mapa">Mapa košnica</Link>
             </li>
+              </>
+            )}
+          
             <li>
               <button onClick={handleLogout} className="navbar-logout">
                 Odjava

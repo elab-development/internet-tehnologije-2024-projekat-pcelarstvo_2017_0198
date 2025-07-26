@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class KosnicaController extends Controller
 {
+    public function indexAdmin(Request $request){
+        return Kosnica::all();
+    }
+
+
+
     public function index(Request $request)
     {
         // Validacija parametara za filtriranje i paginaciju
