@@ -16,7 +16,7 @@ class AdminController extends Controller
         $stats = User::select('role_id')
             ->selectRaw('COUNT(*) as count')
             ->groupBy('role_id')
-            ->with('role') // Ako imate model za uloge
+            ->with('role') 
             ->get();
 
         return response()->json([
