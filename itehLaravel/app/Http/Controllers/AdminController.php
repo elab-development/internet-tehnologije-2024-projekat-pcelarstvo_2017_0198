@@ -119,8 +119,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'kosnica_ids'   => 'required|array|min:1',
             'kosnica_ids.*' => 'integer|exists:kosnicas,id',
-            'date_from'     => 'nullable|date',
-            'date_to'       => 'nullable|date|after_or_equal:date_from',
+           
             'include'       => 'nullable|string',
         ]);
 
@@ -129,8 +128,7 @@ class AdminController extends Controller
         }
 
         $ids       = $request->input('kosnica_ids', []);
-        $dateFrom  = $request->input('date_from');
-        $dateTo    = $request->input('date_to');
+       
         $include   = collect(explode(',', (string)$request->input('include', 'aktivnosti,komentari,vlasnik,autori')))
                         ->map(fn($s) => trim($s))
                         ->filter()
@@ -139,17 +137,7 @@ class AdminController extends Controller
         // Osnovni upit
         $query = Kosnica::query()->whereIn('id', $ids);
 
-        // withCount agregati (poštuju opseg datuma ako je prosleđen)
-        $query->withCount([
-            'aktivnosti as aktivnosti_count' => function ($q) use ($dateFrom, $dateTo) {
-                if ($dateFrom) $q->where('datum', '>=', $dateFrom);
-                if ($dateTo)   $q->where('datum', '<=', $dateTo);
-            },
-            'komentari as komentari_count' => function ($q) use ($dateFrom, $dateTo) {
-                if ($dateFrom) $q->where('datum', '>=', $dateFrom);
-                if ($dateTo)   $q->where('datum', '<=', $dateTo);
-            },
-        ]);
+       
 
         // Dinamičko eager-loadovanje relacija
         $with = [];
@@ -161,11 +149,7 @@ class AdminController extends Controller
 
         // aktivnosti (+ opcioni autor aktivnosti)
         if ($include->contains('aktivnosti')) {
-            $with['aktivnosti'] = function ($q) use ($dateFrom, $dateTo) {
-                if ($dateFrom) $q->where('datum', '>=', $dateFrom);
-                if ($dateTo)   $q->where('datum', '<=', $dateTo);
-                $q->orderBy('datum', 'desc');
-            };
+            
             if ($include->contains('autori')) {
                 $with[] = 'aktivnosti.user';
             }
@@ -173,11 +157,7 @@ class AdminController extends Controller
 
         // komentari (+ opcioni autor komentara)
         if ($include->contains('komentari')) {
-            $with['komentari'] = function ($q) use ($dateFrom, $dateTo) {
-                if ($dateFrom) $q->where('datum', '>=', $dateFrom);
-                if ($dateTo)   $q->where('datum', '<=', $dateTo);
-                $q->orderBy('datum', 'desc');
-            };
+            
             if ($include->contains('autori')) {
                 $with[] = 'komentari.user';
             }
@@ -194,8 +174,7 @@ class AdminController extends Controller
             'generated_at' => now()->toDateTimeString(),
             'filters' => [
                 'kosnica_ids' => $ids,
-                'date_from'   => $dateFrom,
-                'date_to'     => $dateTo,
+               
                 'include'     => $include,
             ],
             'totals' => [
