@@ -14,6 +14,7 @@ import { AuthProvider } from './KomponenteAplikacije/AuthContext';
 import Breadcrumbs from './KomponenteAplikacije/Breadcrumbs';
 import AdminDashboard from './KomponenteAplikacije/Admin/AdminDashboard';
 import AdminZakaziAktivnost from './KomponenteAplikacije/Admin/AdminZakaziAktivnost';
+import AdminKosniceReport from './KomponenteAplikacije/Admin/AdminKosniceReport';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
 
             <Route path="/adminDashboard" element={<AdminDashboard />} />
             <Route path="/adminDashboard/aktivnosti" element={<AdminZakaziAktivnost />} />
+            <Route path="/adminDashboard/izvestaji" element={<AdminKosniceReport />} />
           </Routes>
         </Router>
       </div>

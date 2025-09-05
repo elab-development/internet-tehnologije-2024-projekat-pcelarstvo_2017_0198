@@ -27,4 +27,9 @@ class Kosnica extends Model
     {
         return $this->hasMany(Aktivnost::class);
     }
+    public function komentari()
+    {
+        
+        return $this->hasMany(Komentar::class, 'kosnica_id');
+    }
 }

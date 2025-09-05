@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/admin/aktivnosti-date-range', [AdminController::class, 'aktivnostiByDateRange']);
 
 
-
+        Route::get('/admin/reports/kosnice', [AdminController::class, 'exportKosniceReport']);
 
 
     });
