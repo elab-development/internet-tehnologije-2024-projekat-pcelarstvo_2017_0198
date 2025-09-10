@@ -1,0 +1,63 @@
+/* Osnovni kontejner za Admin Dashboard */
+.admin-dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: #fff;
+    color: #4e342e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Naslov stranice (h1) */
+  .admin-dashboard-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4e342e;
+    font-weight: 700;
+  }
+  
+  /* Sekcija oko svakog grafa (naslov i sam graf) */
+  .chart-section {
+    margin-bottom: 40px;
+  }
+  
+  /* Naslov za sekciju grafa (h2) */
+  .chart-section-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4e342e;
+  }
+  
+  /* Omotač za sam graf da bismo imali bolju kontrolu nad dimenzijama i pozicioniranjem */
+  .chart-wrapper {
+    background: #fff8e1; /* Lagano žućkasta pozadina iz postojeće palete */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsivnost za manje ekrane */
+  @media (max-width: 768px) {
+    .admin-dashboard-container {
+      width: 95%;
+      margin: 20px auto;
+      padding: 10px;
+    }
+  
+    .admin-dashboard-title {
+      font-size: 1.6rem;
+    }
+  
+    .chart-section-title {
+      font-size: 1.2rem;
+    }
+  
+    .chart-wrapper {
+      padding: 10px;
+    }
+  }
+  

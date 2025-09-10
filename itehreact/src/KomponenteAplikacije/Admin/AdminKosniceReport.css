@@ -1,0 +1,195 @@
+/* ===== AdminKosniceReport ===== */
+.admin-report {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  color: #4e342e;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+}
+
+.admin-report h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #4e342e;
+  font-weight: 700;
+}
+
+/* Grid za filtere i kontrolne sekcije */
+.admin-report .filters-grid {
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Fieldset blokovi */
+.admin-report fieldset {
+  border: 1px solid #f0e2bd;
+  background: #fff8e1;         /* kao u chart-wrapper / admin form */
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.admin-report legend {
+  padding: 0 8px;
+  color: #4e342e;
+  font-weight: 600;
+}
+
+/* Inputs */
+.admin-report input[type="date"],
+.admin-report select {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #d6c9a6;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  color: #4e342e;
+}
+
+.admin-report input[type="date"]:focus,
+.admin-report select:focus {
+  border-color: #ffa726;
+  box-shadow: 0 0 0 3px rgba(255,167,38,0.25);
+}
+
+/* Sekcija "Uključi sekcije" – checkbox grida */
+.admin-report .include-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-report .include-grid label {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #f0e2bd;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Selektovanje košnica - kartice */
+.admin-report .kosnice-toolbar {
+  margin-bottom: 10px;
+}
+
+.admin-report .kosnice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.admin-report .kosnica-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #fff;
+  transition: box-shadow 0.2s, transform 0.05s;
+}
+
+.admin-report .kosnica-card:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.admin-report .kosnica-title {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.admin-report .kosnica-meta {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.admin-report .kosnica-opis {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* Paginacija */
+.admin-report .pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.admin-report .pagination .spacer {
+  margin-left: auto;
+}
+
+/* Dugmad */
+.admin-report button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #ffa726;     /* akcenat */
+  color: #4e342e;          /* tamni tekst iz palete */
+  box-shadow: 0 4px 8px rgba(255,167,38,0.25);
+  transition: transform 0.05s, box-shadow 0.2s, background 0.2s;
+}
+
+.admin-report button:hover {
+  box-shadow: 0 6px 14px rgba(255,167,38,0.35);
+}
+
+.admin-report button:active {
+  transform: translateY(1px);
+}
+
+.admin-report button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Sekundarno dugme (za navigaciju strana) */
+.admin-report .btn-secondary {
+  background: #ffe0b2;
+  box-shadow: none;
+}
+
+.admin-report .btn-secondary:hover {
+  background: #ffd599;
+}
+
+/* Greške / poruke */
+.admin-report .error {
+  color: #b00020;
+  font-weight: 700;
+}
+
+/* Responsivnost */
+@media (max-width: 768px) {
+  .admin-report {
+    width: 95%;
+    margin: 20px auto;
+    padding: 16px;
+  }
+
+  .admin-report h2 {
+    font-size: 1.6rem;
+  }
+
+  .admin-report fieldset {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,44 @@
+.admin-form-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff8e1;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 30px;
+  font-family: 'Roboto', sans-serif;
+  color: #4e342e;
+}
+
+.admin-form-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #4e342e;
+}
+
+.admin-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-form-container input,
+.admin-form-container select {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.admin-form-container input:focus,
+.admin-form-container select:focus {
+  border-color: #ffa726;
+}
+
+.admin-form-container .start-button {
+  align-self: flex-end;
+  width: fit-content;
+}

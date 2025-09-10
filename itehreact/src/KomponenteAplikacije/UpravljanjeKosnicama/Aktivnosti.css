@@ -1,0 +1,56 @@
+.flow-chart {
+    display: flex;
+    flex-direction: row; /* Postavlja elemente u red */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap; /* Sprečava prelazak u novi red */
+    overflow-x: auto; /* Dodaje horizontalni scroll ako ima previše elemenata */
+  }
+  
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffecb3;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 250px; /* Postavlja minimalnu širinu svakog koraka */
+    position: relative;
+  }
+  
+  .step-content h3 {
+    margin: 0 0 10px;
+    color: #4e342e;
+    font-size: 1.2rem;
+  }
+  
+  .step-content p {
+    margin: 5px 0;
+    color: #6d4c41;
+    font-size: 0.9rem;
+  }
+  
+  .arrow {
+    position: relative;
+    width: 40px; /* Horizontalna širina */
+    height: 2px;
+    background: #fb8c00;
+    margin: 0 10px; /* Razmak između elemenata */
+  }
+  
+  .arrow::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 0;
+    border: solid #fb8c00;
+    border-width: 5px 5px 0 0;
+    display: inline-block;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
+  }
+  
