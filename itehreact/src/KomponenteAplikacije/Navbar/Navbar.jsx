@@ -6,12 +6,13 @@ import './Navbar.css';
 import { AuthContext } from '../AuthContext';
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useContext(AuthContext); //proverava da li je korisnik ulogovan da bi mogao da se izloguje 
+  const navigate = useNavigate(); 
 
-  // Učitavamo ulogu iz sessionStorage
-  const uloga = Number(sessionStorage.getItem("uloga")); // npr. 1 za admina, 2 za pčelara
-
+  // Ucitava ulogu iz sessionStorage da bi znao sta da prikazuje 1 za admina, 2 za pčelara
+  const uloga = Number(sessionStorage.getItem("uloga")); 
+  
+  //uzima token pa zove backend za tu rutu i ako uspe brise ga i vraca korisnika na login stranicu 
   const handleLogout = async () => {
     try {
       const token = sessionStorage.getItem('token');
@@ -20,7 +21,7 @@ const Navbar = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      logout(); // Uklanja token i ažurira state
+      logout(); 
       navigate('/login');
     } catch (error) {
       console.error('Greška prilikom odjave:', error);

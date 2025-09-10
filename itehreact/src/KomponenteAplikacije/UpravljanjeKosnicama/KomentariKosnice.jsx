@@ -10,7 +10,7 @@ const KomentariKosnice = () => {
   const { id } = useParams(); // Dohvata ID košnice iz URL-a
   const { komentari, loading, error } = useKomentari(id);
 
-  // --- Uzimamo userId iz sessionStorage (pretpostavka) ---
+  //Uzimamo userId iz sessionStorage (pretpostavka) 
   const loggedInUserId = parseInt(sessionStorage.getItem('userId'), 10);
 
   // Forma za kreiranje novog komentara

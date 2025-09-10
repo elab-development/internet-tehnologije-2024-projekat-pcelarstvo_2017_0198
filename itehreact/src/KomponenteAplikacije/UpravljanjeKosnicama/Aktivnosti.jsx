@@ -4,9 +4,11 @@ import useAktivnosti from './useAktivnosti';
 import axios from 'axios';
 import './Aktivnosti.css';
 
-const Aktivnosti = () => {
-  const { id: kosnicaId } = useParams();
-  const { aktivnosti, loading, error } = useAktivnosti(kosnicaId);
+
+const Aktivnosti = () => { 
+  const { id: kosnicaId } = useParams(); //useParams – vraca objekat svih dinamickih delova rute, cita parametre iz url ovde id kosnice
+  const { aktivnosti, loading, error } = useAktivnosti(kosnicaId); //uzima kosnicaId iz url i koristi ga useAktivnosti 
+                                                                  // koja puni aktivnosti niz za tu kosnicu drzi loading i error ako padne
   const [novaAktivnost, setNovaAktivnost] = useState({
     naziv: '',
     datum: '',
@@ -15,24 +17,26 @@ const Aktivnosti = () => {
   });
   const [createError, setCreateError] = useState(null);
 
+  //čita name (npr. "naziv", "datum", "tip", "opis") i value iz inputa
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNovaAktivnost({ ...novaAktivnost, [name]: value });
   };
 
+  //
   const handleCreateAktivnost = async (e) => {
-    e.preventDefault();
-    setCreateError(null);
+    e.preventDefault(); //da forma uradi default reload
+    setCreateError(null); //brise stare greske
     try {
-      const token = sessionStorage.getItem('token');
-      await axios.post(
+      const token = sessionStorage.getItem('token'); //ono uzima token
+      await axios.post(    //salje post sa podacima iz forme 
         'http://127.0.0.1:8000/api/aktivnosti',
         { ...novaAktivnost, kosnica_id: kosnicaId },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setNovaAktivnost({
+      setNovaAktivnost({  //ako uspe resetuje formu na prazna polja i osvezi stranu sa window reload da prikaze listu aktivnosti
         naziv: '',
         datum: '',
         tip: 'sezonska',
@@ -46,7 +50,7 @@ const Aktivnosti = () => {
     }
   };
 
-  // Sortiranje aktivnosti po datumu (hronološki)
+  // sortiranje aktivnosti po datumu 
   const sortiraneAktivnosti = [...aktivnosti].sort(
     (a, b) => new Date(a.datum) - new Date(b.datum)
   );
