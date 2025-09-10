@@ -8,6 +8,7 @@ import pcelicaVideo from './pcelice.mp4';
 
 const Register = () => {
   const navigate = useNavigate();
+  //ovde mi cuva vrednosti iz forme sto korisnik unosi 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,9 +19,10 @@ const Register = () => {
     specialChar: false,
     number: false,
   });
+  //da se password prikazuje kao tackice ne kao znakovi zato je false, a posle dole u input field onToggle menja u true da se prikaze 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
-
+// hvata vrednost iz input polja i cuva ovaj pasvord u state-u password, a onda proverava sta da li ispunjava uslove ispod, pokrece se svaki put kad korisnik kuca lozinku
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -31,7 +33,7 @@ const Register = () => {
       number: /\d/.test(value),
     });
   };
-
+// a ovo raadi finalnu proveru pre nego sto korisnik klikne registruj se i ako ne radi zaustavlja registraciju
   const handleRegister = async (e) => {
     e.preventDefault();
     const isPasswordValid =
@@ -44,15 +46,17 @@ const Register = () => {
       alert('Lozinka nije validna. Proverite uslove za lozinku.');
       return;
     }
-
+//stvarno šalju podaci na backend i odlučuje šta se dešava posle
+//axios salje POST request na backend sa podacima koji su skupljeni iz forme, a await ceka dok server ne odgovori daa bi nastavilo dalje
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/register', {
         name,
         email,
         password,
         password_confirmation: passwordConfirmation,
-        role_id: 1,
+        role_id: 2,
       });
+      //uzme token iz odgovora i cuva u Session Storage i presalta korisnika na login 
       const { token } = response.data;
       sessionStorage.setItem('token', token);
       navigate('/login');

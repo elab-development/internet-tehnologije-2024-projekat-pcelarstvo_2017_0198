@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Breadcrumbs.css'; // (opciono) vaš CSS
+import './Breadcrumbs.css'; 
 
-// Mapa za lepše prikazivanje naziva pojedinih ruta/segmenata.
+// Da prevede da lepse pise kako se zovu rute 
 const segmentTitleMap = {
   '': 'Početna',        
   'login': 'Prijava',
@@ -12,20 +12,20 @@ const segmentTitleMap = {
   'aktivnosti': 'Aktivnosti',
   'komentari': 'Komentari',
 };
-
+//hvata ovaj hook gde smo na trenutnoj putanji 
 const Breadcrumbs = () => {
   const location = useLocation();
 
-  // Razbijamo pathname i uklanjamo prazne segmente
+  // razbije pathname na delove po / kosnice/aktivnosti/6 → ["kosnice", "aktivnosti", "6"].
   let pathSegments = location.pathname.split('/').filter(Boolean);
 
-  // Filtriramo sve segmente koji su isključivo brojevi (npr. "6" ili "123")
+  // izbacuje ono sto su brojevi pa bude ["kosnice", "aktivnosti", "6"] → ostaje ["kosnice", "aktivnosti"].
   pathSegments = pathSegments.filter(segment => !/^\d+$/.test(segment));
 
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
-        {/* Početna stranica (uvek prvi breadcrumb) */}
+        {/* pocetna stranica da bude uvek prvi breadcrumb */}
         <li className="breadcrumb-item">
           <Link to="/">
             {segmentTitleMap[''] || 'Početna'}
@@ -33,14 +33,17 @@ const Breadcrumbs = () => {
         </li>
 
         {pathSegments.map((segment, index) => {
-          // Formiramo putanju do trenutnog segmenta
+          // pravi putanju do trenutnog segmenta
           const url = '/' + pathSegments.slice(0, index + 1).join('/');
 
-          // Proveravamo da li je poslednji segment (pa nećemo link, samo tekst)
+          // gleda da li je poslednji segment i prikazuje ga kao tekst ne kao link
           const isLastSegment = index === pathSegments.length - 1;
 
-          // Ako imamo definisano ime segmenta u mapi, prikazujemo ga
+          // cita lep naziv iz maper a koristi raw ime ako ga nemaa
           const segmentName = segmentTitleMap[segment] || segment;
+
+          //Ako je poslednji → prikaži samo tekst (npr. Aktivnosti).
+          //Ako nije poslednji → prikaži link (npr. Moje košnice).
 
           return (
             <li key={url} className="breadcrumb-item">

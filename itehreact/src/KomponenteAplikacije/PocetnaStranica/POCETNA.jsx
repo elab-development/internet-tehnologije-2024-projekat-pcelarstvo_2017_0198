@@ -1,8 +1,8 @@
 import React from 'react';
 import './POCETNA.css';
 import { useNavigate } from 'react-router-dom';
-import pcelicaVideo from './pcelica.mp4'; // postaviti pcelica.mp4 fajl u isti folder
-
+import pcelicaVideo from './pcelica.mp4'; 
+//kad se klikne prebaci na login
 const POCETNA = () => {
   const navigate = useNavigate();
 

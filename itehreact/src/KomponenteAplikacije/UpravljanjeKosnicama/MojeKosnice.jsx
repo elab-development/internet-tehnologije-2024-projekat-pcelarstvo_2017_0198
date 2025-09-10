@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './MojeKosnice.css';
 
+
 const MojeKosnice = () => {
-  const [filter, setFilter] = useState(null);
-  const [newKosnica, setNewKosnica] = useState({
+  const [filter, setFilter] = useState(null); //drzi trenutni tekst za pretragu
+  const [newKosnica, setNewKosnica] = useState({ //objekat gde drzi vrednost iz forme za kreiranje kosnice 
     naziv: '',
     adresa: '',
     opis: '',
@@ -16,7 +17,7 @@ const MojeKosnice = () => {
   const [createError, setCreateError] = useState(null);
   const navigate = useNavigate();
 
-  // Uzimamo i setKosnice iz custom hook-a
+  // uzima i setKosnice iz custom hooka useKosnice, ovde baca listu kosnice i drugo 
   const {
     kosnice,
     page,
@@ -29,20 +30,25 @@ const MojeKosnice = () => {
     setKosnice,
   } = useKosnice(1, 10, filter);
 
+//menja filter na osnovu unosa u polje i vraca na 1 kad se promeni
   const handleFilterChange = (e) => {
     setFilter(e.target.value || null);
     setPage(1);
   };
 
+//ovo e se poziva kad god nesto unese u inputPolje , destruktuira ga na naziv i na value 
+//Ako je name="naziv", menja newKosnica.naziv.
+//Ako je name="adresa", menja newKosnica.adresa.
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewKosnica({ ...newKosnica, [name]: value });
   };
-
+//sprecava browser da reloaduje stranicu kada se submituje forma i brise stare greske iz state
   const handleCreateKosnica = async (e) => {
     e.preventDefault();
     setCreateError(null);
 
+//cita token da li je tu jer je zasticena pa salje post zahtev na api/kosnice
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.post(
@@ -55,10 +61,10 @@ const MojeKosnice = () => {
         }
       );
 
-      // Dodavanje nove košnice u lokalni state kako bi se odmah prikazala
+      // dodaje novu kosnicu u lokalni state da bi se odmah prikazala 
       setKosnice((prevKosnice) => [response.data.data, ...prevKosnice]);
 
-      // Resetujemo polja forme
+      // kad se uspesno napravi vraca polja na prazno da bi moglo opet odmah nova ako korisnik hoce 
       setNewKosnica({
         naziv: '',
         adresa: '',
@@ -73,12 +79,14 @@ const MojeKosnice = () => {
     }
   };
 
+//prvo potvrdjuje da li zaista obrise kosnicu 
   const handleDeleteKosnica = async (id) => {
     const confirmDelete = window.confirm(
       'Da li ste sigurni da želite da obrišete ovu košnicu?'
     );
     if (!confirmDelete) return;
 
+//salje delete zahtev sa bearer tokenom 
     try {
       const token = sessionStorage.getItem('token');
       await axios.delete(`http://127.0.0.1:8000/api/kosnice/${id}`, {
@@ -87,7 +95,7 @@ const MojeKosnice = () => {
         },
       });
 
-      // Ažuriranje lokalnog state-a: uklanjamo obrisanu košnicu
+// ovo je da se odmah vidi da je nestala kosnica iz tabele tj liste 
       setKosnice((prevKosnice) =>
         prevKosnice.filter((kosnica) => kosnica.id !== id)
       );
@@ -96,10 +104,12 @@ const MojeKosnice = () => {
     }
   };
 
+//da udje na stranicu aktivnosti za tu kosnicu
   const handleDetaljiClick = (id) => {
     navigate(`/kosnice/${id}/aktivnosti`);
   };
 
+//da udje na komentare za tu kosnicu
   const handleKomentariClick = (id) => {
     navigate(`/kosnice/${id}/komentari`);
   };

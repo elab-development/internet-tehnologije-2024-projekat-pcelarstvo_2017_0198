@@ -12,8 +12,13 @@ const AdminZakaziAktivnost = () => {
     kosnica_id: '',
     user_id: '',
   });
+const token = sessionStorage.getItem('token');
 
-  const token = sessionStorage.getItem('token');
+// Kad se komponenta učita, šalje dva GET zahteva:
+// 1. /api/admin/kosnice → vraća listu svih košnica (admin vidi sve).
+// 2. /api/roles/2/users → vraća listu svih korisnika sa rolom pčelar (role_id = 2).
+// Rezultati se stavljaju u state (kosnice, korisnici).
+// console.log samo da proveri šta stiže.
 
   useEffect(() => {
     const fetchPodaci = async () => {
@@ -34,6 +39,11 @@ const AdminZakaziAktivnost = () => {
   const handleChange = (e) => {
     setForma({ ...forma, [e.target.name]: e.target.value });
   };
+
+// Ova komponenta služi administratoru da:
+// Učita sve košnice i sve pčelare.
+// Ispuni formu (naziv, datum, tip, opis, odabir košnice i korisnika).
+// Pošalje POST zahtev → backend kreira aktivnost i šalje notifikaciju pčelaru.
 
   const handleSubmit = async (e) => {
     e.preventDefault();
